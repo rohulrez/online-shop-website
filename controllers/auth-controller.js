@@ -1,6 +1,7 @@
 
 getSignup = (req, res) => {
-    res.send('hello')
+    res.render('auth/signup');
+    return;
 };
 
 getLogin = (req, res) => {
