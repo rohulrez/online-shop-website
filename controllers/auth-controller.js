@@ -1,6 +1,7 @@
+const { get } = require("../routes/auth-routes");
 
 getSignup = (req, res) => {
-    res.render('auth/signup');
+    res.render('customer/auth/signup');
     return;
 };
 
