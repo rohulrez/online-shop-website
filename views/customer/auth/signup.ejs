@@ -6,32 +6,37 @@
     <%- include('../includes/header') %>
     <main>
     <h1>Create New Account</h1>
-    <form action="" method="post">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-        <label for="confirm-email">Confirm Email</label>
-        <input type="email" id="confirm-email" name="confirm-email" required>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" minlength="6" required>
-    </form>
+    <form action="/singup" method="post">
+        <p>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </p>
+        <p>
+            <label for="confirm-email">Confirm Email</label>
+            <input type="email" id="confirm-email" name="confirm-email" required>
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" minlength="6" required>
+        </p>
     <hr>
-    <P>
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" name="fullName" required>
-    </P>
-    <P>
-        <label for="street">Street</label>
-        <input type="text" id="street" name="street" required>
-    </P>
-    <P>
-        <label for="postalCode">Postal Code</label>
-        <input 
-        type="text" 
-        id="postalCode" 
-        name="postalCode" 
-        minlength="5" 
-        maxlength="5" 
-        required>
+        <P>
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required>
+        </P>
+        <P>
+            <label for="street">Street</label>
+            <input type="text" id="street" name="street" required>
+        </P>
+        <P>
+            <label for="postalCode">Postal Code</label>
+            <input 
+            type="text" 
+            id="postalCode" 
+            name="postalCode" 
+            minlength="5" 
+            maxlength="5" 
+            required>
     </P>
     <P>
         <label for="city">Street</label>
@@ -39,6 +44,6 @@
     </P> 
     <button class="btn">Create Account</button>
     <p><a href="/login">Login instead</a></p>
-   </main>
+    </form>
+</main>
 <%- include('../includes/footer') %>
-</html>

@@ -3,8 +3,9 @@
 }
 
 html{
-    font-family: 'Montserrat', 'sans-sarif';
+    font-family: 'Montserrat', 'sans-serif';
 
+    /* Gray Scale Colors */
     --color-gray-50: rgb(250, 250, 250);
     --color-gray-100: rgb(245, 245, 245);
     --color-gray-300: rgb(224, 224, 224);
@@ -13,6 +14,7 @@ html{
     --color-gray-600: rgb(28, 26, 24);
     --color-gray-700: rgb(19, 17, 16);
 
+    /* Primary Colors */
     --color-primary-50: rgb(253, 224, 200);
     --color-primary-100: rgb(250, 203, 166);
     --color-primary-200: rgb(247, 182, 132);
@@ -21,24 +23,31 @@ html{
     --color-primary-500: rgb(240, 119, 30);
     --color-primary-600: rgb(200, 90, 20);
     --color-primary-700: rgb(160, 70, 15);
+
+    /* Contrast Colors */
     --color-primary-200-contrast: rgb(99, 40, 2);
-    --color-primary-500-conrrast: white;
+    --color-primary-500-contrast: white;
 
-
+    /* Error Colors */
     --color-error-100: rgb(255, 190, 180);
     --color-error-500: rgb(199, 50, 15);
 
+    /* Background Colors */
     --color-primary-500-bg: rgb(63, 60,58);
 
+    /* Spacing */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
+    --space-4: 0.75rem;
     --space-6: 1rem;
     --space-8: 1.5rem;
-
+    
+    /* Border Radius  */
     --border-radius-small: 4px;
-    --border-radius-meduim: 6px;
+    --border-radius-medium: 6px;
 
-    --shadow-meduim: 0 2px 8px rgb(0, 0, 0, 0.2)
+    /* Shadows */
+    --shadow-medium: 0 2px 8px rgb(0, 0, 0, 0.2)
 }
 
 body{
@@ -71,5 +80,13 @@ a{
     padding: var(--space-2) var(--space-6);
     background-color: var(--color-primary-500);
     color: var(--color-primary-500-conrrast);
-    border: 1px;
+    border: 1px solid var(--color-primary-500);
+    border-radius: var(--border-radius-small);
+}
+
+.btn:hover,
+.btn:active{
+    background-color: var(--color-primary-700);
+    cursor: pointer;
+    border-color: var(--color-primary-700);
 }
