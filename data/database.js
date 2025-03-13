@@ -18,6 +18,6 @@ return database;
 }
 
 module.exports = { 
-    connectToDatabase,
-    getDb
+    connectToDatabase: connectToDatabase,
+    getDb: getDb
 }
