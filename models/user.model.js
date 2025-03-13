@@ -1,6 +1,7 @@
 const { post } = require("../routes/auth-routes");
 
-const db = require('../data/database')
+const db = require('../data/database');
+const bcrypt = require('bcryptjs');
 
 class User {
     constructor(email, password, fullname, street, postal, city) {
@@ -14,8 +15,17 @@ class User {
         };
     };
 
-    signUp () {
+    signup = async() => {
+        const hashedPassword = await bcrypt.hash(this.password, 12);
 
+        await db.getDb().collection('users').insertOne({
+            email: this.email,
+            password: hashedPassword,
+            name: this.name,
+            address: this.address
+        })
     }
 
 }
+
+module.exports = User;

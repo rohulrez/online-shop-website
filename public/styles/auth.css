@@ -35,7 +35,7 @@ label{
 }
 
 input, textarea{
-    color: var(--color-gray-100);
+    color: var(--color-gray-700);
     font: inherit;
     padding: var(--space-2);
     border: none;
