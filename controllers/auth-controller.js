@@ -47,7 +47,13 @@ login = async (req, res) => {
 
     authUtil.createUserSession(req, existingUser, () => {
         res.redirect('/');
-    })
+    });
+    };
+
+    
+logout = (req, res) => {
+    authUtil.destroyUserAuthSession(req);
+    res.redirect('/login');
 }
 
 
@@ -55,6 +61,6 @@ module.exports = {
     getSignup: getSignup,
     getLogin: getLogin,
     signup: signup,
-    login: login
-
+    login: login, 
+    logout: logout
 }

@@ -3,6 +3,11 @@ createUserSession = (req, user, action) => {
     req.session.save(action);
 }
 
+destroyUserAuthSession = (req) => {
+    req.session.uid = null;
+}
+
 module.exports = {
-    createUserSession: createUserSession
+    createUserSession: createUserSession,
+    destroyUserAuthSession: destroyUserAuthSession
 }
