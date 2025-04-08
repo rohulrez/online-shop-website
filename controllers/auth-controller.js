@@ -1,17 +1,28 @@
 const session = require("express-session");
 const User = require("../models/user.model");
-const { get, post, use } = require("../routes/auth-routes");
 const authUtil = require('../util/authentication');
 
 const sessionFlash = require('../util/session-flash')
 
 const validation = require('../util/validation')
 
-getSignup = (req, res) => {
-    res.render('customer/auth/signup');
+function getSignup (req, res) {
+    let sessionData = sessionFlash.getSessionData(req);
+    if(!sessionData) {
+        sessionData = {
+            email: '',
+            confirmEmail : '',
+            password: '',
+            fullname: '',
+            street: '',
+            postal: '',
+            city: ''
+        }
+    }
+    res.render('customer/auth/signup', {inputData: sessionData});
 };
 
-signup = async (req, res, next) => {
+async function signup  (req, res, next) {
     const {email, password, fullname, street, postal, city} = req.body;
 
     const enteredData = {
@@ -20,7 +31,7 @@ signup = async (req, res, next) => {
         password: req.body.password, 
         fullname: req.body.fullname, 
         street: req.body.street, 
-        postal: req.body.potal, 
+        postal: req.body.postal, 
         city: req.body.city
     }
 
@@ -51,7 +62,7 @@ signup = async (req, res, next) => {
 
         if(existsAlready) {
             sessionFlash.flashDataToSession(req, {
-                errorMessage: 'User already exists!',
+                errorMessage: 'User exists already!',
                 ...enteredData
             }, () => {
                 res.redirect('/signup')
@@ -67,24 +78,19 @@ signup = async (req, res, next) => {
     res.redirect('/login');
 }
 
-getLogin = (req, res) => {
+function getLogin (req, res) {
     let sessionData = sessionFlash.getSessionData(req);
 
     if(!sessionData) {
         sessionData = {
             email: '',
-            confirmEmail : '',
-            password: '',
-            fullname: '',
-            street: '',
-            postal: '',
-            city: ''
+            password: '', 
         }
     }
-    res.render('customer/auth/login')
+    res.render('customer/auth/login', {inputData: sessionData})
 }
 
-login = async (req, res, next) => {
+async function login (req, res, next) {
     const user = new User(
         req.body.email, 
         req.body.password
@@ -128,7 +134,7 @@ login = async (req, res, next) => {
     };
 
 
-logout = (req, res) => {
+function logout (req, res) {
     authUtil.destroyUserAuthSession(req);
     res.redirect('/login');
 }

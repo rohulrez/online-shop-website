@@ -1,12 +1,12 @@
-getSessionData = (req) => {
+function getSessionData (req) {
     const sessionData  = req.session.flashedData;
 
-    req.session.flasheddata = null;
+    req.session.flashedData = null;
 
     return sessionData;
 }
 
-flashDataToSession = (req, data, action) => {
+function flashDataToSession (req, data, action){
     req.session.flashedData = data;
     req.session.save(action)
 }
