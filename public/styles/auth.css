@@ -23,22 +23,3 @@ form a:active{
     color: var(--color-primary-400);
 }
 
-hr{
-    border-color: var(--color-primary-200);
-    margin: var(--space-4);
-}
-
-label{
-    color: var(--color-gray-100);
-    display: block;
-    margin-bottom: var(--space-2);
-}
-
-input, textarea{
-    color: var(--color-gray-700);
-    font: inherit;
-    padding: var(--space-2);
-    border: none;
-    border-radius: var(--border-radius-small);
-    width: 90%;
-}

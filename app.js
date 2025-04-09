@@ -13,6 +13,8 @@ const authRoutes = require('./routes/auth-routes');
 
 const productsRoutes = require('./routes/products.routes');
 const baseRoutes = require('./routes/base.routes');
+const adminRoutes = require('./routes/admin.routes');
+
 
 const { error } = require('console');
 
@@ -31,6 +33,8 @@ app.use(csrf());
 app.use(addCsrfTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 app.use(errorHandlerMiddleware);
+
+app.use('/admin', adminRoutes);
 
 app.use(productsRoutes);
 
