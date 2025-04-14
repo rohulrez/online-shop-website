@@ -4,13 +4,7 @@
 <body>
     <%- include('../../shared/includes/header') %>
 <main>
-    <h1>Add New Product</h1>
-    <%-include('includes/product-form.ejs', {submithPath: "/admin/product", product:{
-        title: '',
-        price: '',
-        summary: '',
-        description: ''
-    }, 
-    imageRequired: true })%>
+    <h1>Update Product</h1>
+    <%-include('includes/product-form.ejs', {submitPath: '/admin/products/' + product.id, product: product, imageRequired: false})%>
 </main>
 <%- include('../../shared/includes/footer') %>
