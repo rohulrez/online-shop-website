@@ -17,14 +17,13 @@ function getNewProduct(req, res) {
 async function createNewProduct (req, res, next) {
     const product = new Product({
         ...req.body,
-        image: req.file ? req.file.filename : null
+        image: req.file.filename
     })
 
     try{
         await product.save()
     } catch(error) {
         next(error);
-        return;
     }
 
     res.redirect('/admin/products')
@@ -61,9 +60,18 @@ async function updateProduct (req, res, next) {
     res.redirect('/admin/products');
 }
 
-// function deleteProduct () {
+async function deleteProduct (req, res, next) {
+    let product;
 
-// }
+    try{ 
+        product =  await Product.findById(req.params.id)  
+        product.remove(proId);
+    } catch(error) {
+        next(error)
+    }
+
+    res.json({ message: 'Deleted Product!'});
+}
 
 
 module.exports = {
@@ -72,5 +80,5 @@ module.exports = {
     createNewProduct: createNewProduct,
     getUpdateProduct: getUpdateProduct,
     updateProduct: updateProduct,
-    // deleteProduct: deleteProduct
+    deleteProduct: deleteProduct
 }
