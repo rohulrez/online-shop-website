@@ -22,60 +22,57 @@ function getSignup (req, res) {
     res.render('customer/auth/signup', {inputData: sessionData});
 };
 
-async function signup  (req, res, next) {
-    const {email, password, fullname, street, postal, city} = req.body;
-
+async function signup(req, res, next) {
     const enteredData = {
-        email:  req.body.email, 
+        email: req.body.email, 
         confirmEmail: req.body['confirm-email'],
         password: req.body.password, 
         fullname: req.body.fullname, 
         street: req.body.street, 
-        postal: req.body.postal, 
+        postal: req.body.postal,  
         city: req.body.city
-    }
+    };
 
     if(!validation.userDetailsAreValid(
-        req.body.email, 
-        req.body.password, 
-        req.body.fullname, 
-        req.body.street, 
-        req.body.potal, 
-        req.body.city)
-    || !validation.emailIsConfirmed(req.body.email, req.body['confirm-email'])
+        enteredData.email, 
+        enteredData.password, 
+        enteredData.fullname, 
+        enteredData.street, 
+        enteredData.postal, 
+        enteredData.city
+    ) || !validation.emailIsConfirmed(enteredData.email, enteredData.confirmEmail)
     ) {
-        sessionFlash.flashDataToSession(req, {
-            errorMessage: 'Please check you input!',
+        await sessionFlash.flashDataToSession(req, {
+            errorMessage: 'Please check your input!', 
             ...enteredData
-        }, () => {
-            res.redirect('/signup');
-        })
-        return;
+        });
+        return res.redirect('/signup');
     }
 
-    const user = new User(email, password, fullname, street, postal, city );
+    const user = new User(
+        enteredData.email, 
+        enteredData.password, 
+        enteredData.fullname, 
+        enteredData.street, 
+        enteredData.postal, 
+        enteredData.city
+    );
 
-    
-
-    try{
-        const existsAlready =  await user.existsAlready()
-
+    try {
+        const existsAlready = await user.existsAlready();
         if(existsAlready) {
-            sessionFlash.flashDataToSession(req, {
+            await sessionFlash.flashDataToSession(req, {
                 errorMessage: 'User exists already!',
                 ...enteredData
-            }, () => {
-                res.redirect('/signup')
-            })
-        return;
+            });
+            return res.redirect('/signup');
         }
-        await user.signup();
-    } catch (error){
-        next(error);        
-        return;
-    }
 
-    res.redirect('/login');
+        await user.signup();
+        return res.redirect('/login');
+    } catch(error) {
+        next(error);
+    }
 }
 
 function getLogin (req, res) {

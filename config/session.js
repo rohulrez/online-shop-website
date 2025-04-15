@@ -4,7 +4,7 @@ const mongoDbStore = require('connect-mongodb-session');
 const MongoDbStore = mongoDbStore(session); 
 
 
-createSessionStore = () => {
+function createSessionStore () {
 
     const store = new MongoDbStore({
         uri: 'mongodb://localhost:27017',
@@ -14,7 +14,7 @@ createSessionStore = () => {
     return store;
 };
 
-creatSessionConfig = () => {
+function createSessionConfig() {
     return {
         secret: 'super-secret',
         resave: false,
@@ -26,4 +26,4 @@ creatSessionConfig = () => {
     }
 };
 
-module.exports = creatSessionConfig;
+module.exports = createSessionConfig;

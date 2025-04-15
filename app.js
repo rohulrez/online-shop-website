@@ -4,13 +4,12 @@ const csrf = require('csurf');
 const expressSession = require('express-session')
 
 
-const creatSessionConfig = require('./config/session')
+const createSessionConfig = require('./config/session')
 const db = require('./data/database')
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
-const protectRoutesMiddleware = require('./middlewares/protect-routes');
-
+const protectRoutesMiddleware = require('./middlewares/protect-routes')
 
 const authRoutes = require('./routes/auth-routes');
 
@@ -30,19 +29,19 @@ app.use('/products/assets/', express.static('product-data'));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
-app.use(expressSession(creatSessionConfig()));
+app.use(expressSession(createSessionConfig()));
 
-app.use(csrf());
+app.use(csrf({session: true}));
+app.use(express.json());
 
 app.use(addCsrfTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 
-
-app.use(productsRoutes);
 app.use(baseRoutes);
 app.use(authRoutes);
+app.use(productsRoutes);
 
-app.use(protectRoutesMiddleware);
+app.use(protectRoutesMiddleware)
 app.use('/admin', adminRoutes);
 
 app.use(errorHandlerMiddleware);
