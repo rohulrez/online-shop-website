@@ -1,8 +1,12 @@
-handleErrors = (error, req, res, next) => {
+function handleErrors (error, req, res, next) {
     console.log(error);
-    res.status(500).render('500');
+
+    if (error.code === 404) {
+        return res.status(400).render('shared/404');
+    }
+
+    res.status(500).render('shared/500');
     next()
 }
 
 module.exports = handleErrors;
-
