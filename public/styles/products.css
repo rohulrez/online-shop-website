@@ -36,11 +36,14 @@
   justify-content: center;
 }
 
+
+
 #product-details header {
   margin-top: var(--space-8);
   padding: var(--space-8);
   background-color: var(--color-gray-600);
   gap: var(--space-8);
+  border-radius: var(--border-radius-medium);
 }
 
 #product-details img {
@@ -62,8 +65,10 @@
 }
 
 @media (min-width: 48rem) {
+
   #product-details header {
     display: flex;
+    border-radius: var(--border-radius-medium);
   }
 
   #product-details img {
