@@ -62,6 +62,7 @@
   background-color: var(--color-primary-500-bg);
   padding: var(--space-8);
   white-space: pre-wrap;
+  border-radius: var(--border-radius-medium);
 }
 
 @media (min-width: 48rem) {
@@ -81,6 +82,11 @@
   #product-info {
     text-align: left;
   }
+
+  #product-description {
+    border-radius: var(--border-radius-medium);
+  }
+
 
 }
 
