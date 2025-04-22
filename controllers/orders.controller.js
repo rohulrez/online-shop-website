@@ -3,9 +3,19 @@ const User = require ('../models/user.model');
 const { get } = require('../routes/auth-routes');
 
 
-function getOrdrs (req, res) {
-    res.render('customer/orders/all-orders');
+async function getOrders (req, res, next) {
+    try {
+        const orders = await Order.findAllForUser(res.locals.uid);
+        res.render('customer/orders/all-orders', {
+            orders: orders
+        });
+    } catch(error) {
+        return next(error);
+    }
+
 }
+
+
 
 async function addOrder (req, res, next){
     const cart = res.locals.cart;
@@ -33,7 +43,7 @@ async function addOrder (req, res, next){
 }
 
 module.exports = {
-    getOrdrs,
+    getOrders,
     addOrder,
 
 }

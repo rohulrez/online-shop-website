@@ -5,9 +5,10 @@ const { route } = require('./auth-routes');
 
 const router = express.Router();
 
-router.get('/', orderController.getOrdrs);
+router.get('/', orderController.getOrders);
 
 router.post('/', orderController.addOrder);
+
 
 
 module.exports = router;
