@@ -1,4 +1,3 @@
-const Product = require("../../models/product.model");
 
 const addToCartButtonElement = document.querySelector('#product-details button');
 const cartBadgeElement = document.querySelector('.nav-items .badge')
@@ -41,4 +40,4 @@ async function addToCart () {
 
    cartBadgeElement.textContent = newTotalQuantity;
 }
-addToCartButtonEement.addEventListener('click', addToCart);
+addToCartButtonElement.addEventListener('click', addToCart);
