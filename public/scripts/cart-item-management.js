@@ -19,13 +19,14 @@ async function updateCartItem (event) {
     try {
         response = await fetch('/cart/items', {
             method: 'PATCH',
+            credentials: 'include',
             body: JSON.stringify({
                 _csrf: csrfToken,
                 productId: productId,
-                quantity : quantity,
+                newQuantity : quantity,
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
     })
     } catch (error) {
@@ -40,10 +41,18 @@ async function updateCartItem (event) {
     }
 
     const responseData = await response.json();
-    console.log(responseData)
 
-    const cartItemTotalPriceElement = form.parentElement.querySelector('.cart-item-price');
-    cartItemTotalPriceElement.textContent = responseData.updatedCartData.updatedItemPrice.toFixed(2);
+    if (responseData.updatedCartData.updatedItemPrice === 0) {
+        form.parentElement.parentElement.remove()
+    } else {   
+        const cartItemTotalPriceElement = 
+        form.parentElement.querySelector('.cart-item-price');
+
+        cartItemTotalPriceElement.textContent = 
+        responseData.updatedCartData.updatedItemPrice.toFixed(2);
+
+    }
+
 
     cartTotalPriceElement.textContent = responseData.updatedCartData.newTotalPrice.toFixed(2);
 

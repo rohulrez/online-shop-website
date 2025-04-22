@@ -1,7 +1,8 @@
-const { post } = require("../routes/auth-routes");
+const { post, use } = require("../routes/auth-routes");
 
 const db = require('../data/database');
 const bcrypt = require('bcryptjs');
+const mongodb = require('mongodb');
 
 class User {
     constructor(email, password, fullName, street, postal, city) {
@@ -14,6 +15,16 @@ class User {
             city: city
         };
     };
+
+
+    static findById (userId) {
+        const uid = new mongodb.ObjectId(userId);
+
+        return db
+        .getDb()
+        .collection('users')
+        .findOne({_id : uid}, {projection: {password: 0} })
+    }
 
     async getUserWithSameEmail() {
         return db.getDb().collection('users').findOne({email: this.email});
